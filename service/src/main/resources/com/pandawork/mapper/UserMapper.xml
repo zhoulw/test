@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pandawork.mapper.UserMapper">
+
+    <select id="queryById" resultMap="pw.User" >
+        SELECT * FROM `t_user` WHERE `id` = #{id}
+    </select>
+
+    <insert id="newUser">
+  INSERT INTO t_user (user_name,password) VALUE(#{userName},#{password})
+
+    </insert>
+
+    <update id="update">
+        UPDATE `t_user`
+        SET `user_name` = #{user.userName},
+            `password` = #{user.password}
+        where `id` = #{user.id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM `t_user` WHERE `id` = #{id}
+    </delete>
+
+    <select id="listAll" resultMap="pw.User">
+        SELECT * FROM `t_user`
+    </select>
+
+
+    <select id="countByUserName" resultType="int">
+    SELECT count(1) FROM `t_user`
+    WHERE `user_name` = #{userName}
+</select>
+    <select id="queryIndepw" resultType="String">
+        SELECT indepw FROM `t_user`
+        WHERE user_name=#{userName}
+    </select>
+
+    <select id="queryByUserName" resultMap="pw.User">
+        SELECT * FROM `t_user`
+        WHERE user_name=#{userName}
+    </select>
+</mapper>

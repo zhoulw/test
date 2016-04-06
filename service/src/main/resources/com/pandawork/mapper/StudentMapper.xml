@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pandawork.mapper.StudentMapper">
+
+    <select id="queryById" resultMap="pw.Student" >
+        SELECT * FROM `t_student` WHERE `id` = #{id}
+    </select>
+
+    <insert id="newStudent">
+    INSERT INTO t_student (password,student_num,name,sex,grade,class_num,college,birthday)
+    VALUE(#{student.password},#{student.studentNumber},#{student.name},#{student.sex},#{student.grade},#{student.classNumber},#{student.college},#{student.birthday})
+
+    </insert>
+
+    <update id="update">
+        UPDATE `t_student`
+        SET `student_num` = #{student.studentNumber},
+        `password` = #{user.password}
+       `name` = #{student.studentName},
+       `sex` = #{student.sex},
+        `grade` = #{student.grade},
+       `class_num` = #{student.classNumber},
+       `college` = #{student.college},
+         `birthday` = #{student.birthday},
+        where `id` = #{student.id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM `t_student` WHERE `id` = #{id}
+    </delete>
+
+    <select id="listAll" resultMap="pw.Student">
+        SELECT * FROM `t_student`
+    </select>
+
+
+    <select id="countByStudentNumber" resultType="int">
+        SELECT count(1) FROM t_student
+        WHERE student_num = #{studentNumber}
+    </select>
+    <select id="queryIndepw" resultType="String">
+        SELECT indepw FROM `t_student`
+        WHERE student_num=#{studentNumber}
+    </select>
+
+    <select id="queryByStudentNumber" resultMap="pw.Student">
+        SELECT * FROM `t_student`
+        WHERE student_num=#{studentNumber}
+    </select>
+</mapper>
